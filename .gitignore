@@ -94,6 +94,7 @@ ENV/
 
 # Private data
 db_instructions.txt
+agendixi/bot-token.txt
 
 # Temporary files
 *.swp
