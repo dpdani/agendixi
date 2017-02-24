@@ -94,3 +94,6 @@ ENV/
 
 # Private data
 db_instructions.txt
+
+# Temporary files
+*.swp
