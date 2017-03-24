@@ -3,6 +3,7 @@
 
 import threading
 import argparse
+import getpass
 import datetime
 import telegram
 import sqlalchemy as sqlal
@@ -37,9 +38,9 @@ def db_connect(passwd):
 
 def db_poll():
     for event in session.query(Event).filter_by(Sent=False):
-        if event.ID not in shceduled_events:
+        if event.ID not in scheduled_events:
             schedule_message(event)
-    t = threading.Timer(10, db_poll)  # polling time: 10 secs
+    t = threading.Timer(2, db_poll)  # polling time: 2 secs
     t.start()
     timers.append(t)
 
@@ -56,9 +57,17 @@ def schedule_message(event):
 
 
 def main(args):
-    password = input('Please enter database password for \'agendixi\': ')
-    engine, session = db_connect(password)
-    session.query(Event).first()
+    try:
+        password = getpass.getpass('Please enter database password for \'agendixi\': ')
+    except KeyboardInterrupt:
+        print('Bye!')
+        return
+    try:
+        engine, session = db_connect(password)
+        session.query(Event).first()
+    except sqlal.exc.OperationalError:
+        print('\nIncorrect password.')
+        return
     while True:
         inp = input('$ ')
         if inp in ('q',):
