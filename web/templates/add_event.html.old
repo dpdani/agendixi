@@ -1,0 +1,43 @@
+<!-- 
+  ****************************************
+  Contest Entry for Treehouse:
+  "Design a Contact Form"
+  Submitted by Lisa Wagner
+  ****************************************
+-->
+
+<html>
+<head>
+<link href='/static/style.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="contact-form">
+	<div>
+		<h1>ADD EVENT</h1> 
+		<h4>Fill out the form to add a broadcast event!</h4> 
+	</div>
+		<p id="failure">Oopsie...message not sent.</p>  
+		<p id="success">Your message was sent successfully. Thank you!</p>
+
+		   <form method="post" action="/add/">
+                      {% csrf_token %}
+			<div>
+		      <label for="date">
+		      	<span class="required">Date: *</span> 
+		      	<input type="datetime-local" id="date" name="date" value="" required="required" tabindex="1" autofocus="autofocus" />
+		      </label> 
+			</div>
+			<div>		          
+		      <label for="message">
+		      	<span class="required">Message: *</span> 
+		      	<textarea id="description" name="description" placeholder="Event description: " tabindex="5" required="required"></textarea> 
+		      </label>  
+			</div>
+			<div>		           
+		      <button name="submit" type="submit" id="submit" >SEND</button> 
+			</div>
+		   </form>
+
+	</div>
+</body>
+</html>

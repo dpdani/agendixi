@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>agendixi</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+        <link href='/static/index_style.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<h1 style='text-align: center'>
+Welcome to agendixi!
+</h1>
+<a style='text-align: center' href='/add/'>
+Add an event!
+</a>
+<div class="table-title">
+<h3>Scheduled events</h3>
+</div>
+{% if events %}
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Scheduled for</th>
+<th class="text-left">Description</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+{% for evt in events %}
+  <tr>
+  {% for x in evt %}
+    <td class='text-left'>{{ x }}</td>
+  {% endfor %}
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p style='text-align: center'>
+No events scheduled.
+</p>
+{% endif %}
+</body>
+</html>
